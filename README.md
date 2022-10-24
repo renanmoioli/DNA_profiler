@@ -13,9 +13,9 @@
 
 Neste trabalho iremos desenvolver um programa de processamento de DNA. O programa, chamado **dna_profiler**[^1], deve receber duas entradas, representando 
 dois arquivos: o primeiro, será um arquivo _[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)_ que contém uma base de dados de DNA; o segundo é um 
-arquivo de texto contendo sequencia de DNA que deve ser verficada. O seu programa deverá então, criar um perfil de DNA a partir da entrada e verificar se 
-esse perfil está presente na base de dados. Em caso positivo, seu programa deverá imprimir na saída o nome da pessoa que tem o perfil encontrado, caso 
-contrário o programa deverá imprimir _"no match found"_.
+arquivo de texto contendo a sequencia de DNA que deve ser verificada. O seu programa deverá, então, criar um perfil de DNA a partir da entrada e verificar se 
+esse perfil está presente na base de dados. Em caso positivo, seu programa deverá imprimir na saída o nome da pessoa que tem o perfil encontrado; caso 
+contrário, o programa deverá imprimir _"no match found"_.
 
 [^1]: This assignment is a copy (with a few adaptations) of a programming project that may be found [here](http://nifty.stanford.edu/2020/dna/).
 
@@ -24,25 +24,23 @@ contrário o programa deverá imprimir _"no match found"_.
 O DNA, que carrega as informações genéticas dos seres vivos, é usado pela justiça há décadas. Mas como, exatamente, funciona o processo de criação de perfis de DNA?
 Dada uma sequencia de DNA, como os investigadores identificam à quem aquele DNA pertence?
 
-Bem, na verdade o DNA é apenas um conjunto de moléculas chamadas nulceotídeos, agrupdadas em um formato particular (uma hélice dupla). Cada nucleotídeo do DNA contém
-um de quatro diferente bases: adenina (`A`), citosina (`C`), guanina (`G`) e timina (`T`). Cada célula humana tem milhões desses nucleotídeos agrupados em sequência.
-Algumas porções dessa sequencia (por exemplo, o genoma) são iguais, ou ao menos muito similares, entre todos os humanos, mas outras partes tem uma alta diversidade
-genética, logo variando entre as pessoas.
+O DNA é apenas um conjunto de moléculas chamadas nucleotídeos, agrupadas em um formato particular (uma hélice dupla). Cada nucleotídeo do DNA contém
+uma de quatro diferentes bases: adenina (`A`), citosina (`C`), guanina (`G`) e timina (`T`). Cada célula humana possui milhões desses nucleotídeos agrupados em sequência. Entre todos os humanos, algumas porções dessa sequencia são iguais, ou ao menos muito similares, mas outras partes têm uma alta diversidade genética, logo variando entre indivíduos.
 
 Um ponto onde o DNA tende a ser muito diverso é nos [**Short Tandem Repeats** (STRs)](https://en.wikipedia.org/wiki/STR_analysis). Um STR é uma sequencia curta de DNA
-que se repete uma determinada quantidade de vezes em lugares específicos do DNA. O número de vezes que um STR se repete varia muito entre as pessoas. Abaixo,
-por exemplo, Alice o STR `AGAT` repetido 4 vezes em seu DNA, enquanto bob tem o mesmo STR repetido 6 vezes.
+que se repete uma determinada quantidade de vezes em lugares específicos do DNA. O número de vezes que um STR se repete varia muito entre as pessoas. No exemplo abaixo, Alice possui o STR `AGAT` repetido 4 vezes em seu DNA, enquanto que Bob tem o mesmo STR repetido 6 vezes.
 
 <img src="./pics/ALICE_BOB_DNA.png" width="350">
 
-Se usarmos múltimos STRs, ao invés de apenas 1, podemos aumentar a acurácia do perfil. Se a probabilidade de duas pessoas terem o mesmo número de repetições de um STR
-é de 5%, e os analistas usam 10 diferentes STR, a problabilidade de duas amostras de DNA serem iguais, apenas por sorte é de 1 em um quadrilhão (assumindo que cada
-STR é independente um do outro). Assim se duas amostras de DNA tem o mesmo número de repetições de STRs, o analista é bem confiante que o DNA vem da mesma pessoa. 
+Se usarmos múltiplos STRs, ao invés de apenas 1, podemos aumentar a acurácia do perfil. Se a probabilidade de duas pessoas terem o mesmo número de repetições de um STR
+é de 5%, e os analistas usam 10 diferentes STR, a probabilidade de duas amostras de DNA serem iguais, apenas por sorte, é de 1 em um quadrilhão (assumindo que cada
+STR é independente um do outro). Assim, se duas amostras de DNA têm o mesmo número de repetições de STRs, o analista é bem confiante que o DNA vem da mesma pessoa. 
 O [CODIS](https://www.fbi.gov/services/laboratory/biometric-analysis/codis/codis-and-ndis-fact-sheet), a base de dados do FBI, usa 20 STRs diferentes como parte
 da análise de amostras de DNA.
 
-Na forma mais simples, você pode imaginar que uma base de dados de DNA formatada em um _CSV_, onde cada linha corresponde a um indivíduo e cada coluna corresponde a
+Na forma mais simples, você pode imaginar uma base de dados de DNA formatada em um _CSV_, onde cada linha corresponde a um indivíduo e cada coluna corresponde a
 um STR particular.
+
 ```
 name,AGAT,AATG,TATC
 Alice,28,42,14
@@ -51,34 +49,31 @@ Charlie,36,18,25
 ```
 
 Pelos dados acima, Alice tem a sequencia `AGAT` repetida 28 vezes em algum lugar de seu DNA, bem como as squencias `AATG` e `TATC` repetidas 42 e 14 vezes, 
-respectivamente. De forma similar as informações para Bob e Charlie contém as repetições das sequencias (17, 22 e 19 para bob e 36, 18 e 25 para Charlie).
+respectivamente. De forma similar, o arquivo contém as repetições das sequencias para Bob e Charlie (17, 22 e 19 para Bob e 36, 18 e 25 para Charlie). Dessa forma, dada uma sequencia de DNA, como você identificaria quem é dono? 
 
-Dessa forma, dada uma sequencia de DNA, como você identificaria quem é dono? Bem, imagine que você busque na sequencia de DNA pela sequencia mais longa de `AGAT`
-e encontrar que ela tem tamanho 17 (uma sequencia de 17 `AGAT` consecutivos). Depois, voce repete o processo para `AATG` e descobre que ele se repete 22 vezes, por fim
-`TATC` se repete 19 vezes. É bem provavel que este DNA pertença à Bob. Também é possível que depois que fizermos os procedimentos, ainda assim ninguem na base de
-dados bate com as características encontradas, nesse caso você tem um "no match".
+Bem, imagine que você busque na sequencia de DNA pela sequencia mais longa de `AGAT` e encontre que ela tem tamanho 17 (uma sequencia de 17 `AGAT` consecutivos). Depois, voce repete o processo para `AATG` e descobre que ela se repete 22 vezes, e por fim `TATC` se repete 19 vezes. É bem provavel que este DNA pertença à Bob. Também é possível que, depois que fizermos os procedimentos, ainda assim ninguem na base de dados bata com as características encontradas, nesse caso você tem um "no match".
 
 Na prática, os analistas sabem as localizações em que uma determinada STR vai ser encontrada no DNA, assim eles podem realizar buscas localizadas em apenas uma
 porção do DNA ao invés de analisar toda a estrutura, porém esse detalhe será ignorado por nós neste trabalho.
 
-Assim, seu trabalho é escrever um sistema que receberá uma sequencia de DNA e uma base de dados contendo alguns perfis de indivíduos e verificar, se o DNA recebido
-está presente na base ou não!.
+Portanto, seu trabalho é escrever um sistema que receberá uma sequencia de DNA e uma base de dados contendo alguns perfis de indivíduos e verificar se o DNA recebido
+está presente na base ou não.
 
 # 3. Entrada
 
-Você deverá ler dois arquivos de texto, um representado no formato CSV contendo a base de dados e outro contendo uma sequencia de DNA de um indivíduo que queremos
+Você deverá ler dois arquivos de texto, um representado no formato CSV, contendo a base de dados, e outro contendo uma sequencia de DNA de um indivíduo que queremos
 identificar.
 
 ## 3.1 A base de dados de DNA
 
 A base de dados é basicamente uma tabela no seguinte formato:
 
-1. Primeira linha: contém os nomes das colunas separadas por ','. A primeira coluna é sempre "name" seguida por uma quantidade 'n' de STRs que devem ser
+1. Primeira linha: contém os nomes das colunas separadas por ','. A primeira coluna é sempre "name", seguida por uma quantidade 'n' de STRs que devem ser
 considerados ao analisar as sequencias de entrada.
 2. Uma quantidade _não determinada_ de linhas, cada uma contendo o nome de um indivíduo e seu perfil de DNA correspondente, na forma do número máximo que
 uma sequencia de STRs repetidos aparecem em seu DNA.
 
-A entrada, apresentada no inico deste documento representa a tabela abaixo:
+A entrada, apresentada no inicio deste documento representa a tabela abaixo:
 
 | name | `AGAT` | `AATG` | `TATC`
 |:--------:| -------------:|-------------:|-------------:|
@@ -99,7 +94,7 @@ Este é o de Bob:
 E este é o de Charlie:
 > CCAGATAGATAGATAGATAGATAGATGTCACAGGGATGCTGAGGGCTGCTTCGTACGTACTCCTGATTTCGGGGATCGCTGACACTAATGCGTGCGAGCGGATCGATCTCTATCTATCTATCTATCTATCCTATAGCATAGACATCCAGATAGATAGATC
 
-Claro que nós já sabemos quem é o dono das sequencias mostradas à cima, mas seu programa não sabe. Por isos o programa deve receber o DNA como entrada
+Claro que nós já sabemos quem é o dono das sequencias mostradas à cima, mas seu programa não sabe. Por isso o programa deve receber o DNA como entrada
 e procurar pela sequencia mais longa com consecutivos STRs de acordo com nossa base de dados.
 
 Os arquivos da base de dados e dos segmentos de DNA estão disponíveis [aqui](data).
@@ -117,17 +112,17 @@ Usage: dna_profiler -d <database_file> -s <dna_sequence_file>
 
 # 5. Execução
 
-Depois de receber os arquivos pelo terminal, o programa deve: (1) abrir o arquivo `.csv` e ler seu conteúdo, (2) abrir o arquivo de DNA e ler seu conteúdo. Depois
-disso o programa deve realizar o processamento do DNA recebido e procurar se o perfil resultante do processamento está presente na base de dados. Caso o perfil
+Depois de receber os arquivos pelo terminal, o programa deve: (1) abrir o arquivo `.csv` e ler o seu conteúdo, (2) abrir o arquivo de DNA e ler o seu conteúdo. Depois
+disso, o programa deve realizar o processamento do DNA recebido e procurar se o perfil resultante do processamento está presente na base de dados. Caso o perfil
 identifique alguém da base de dados, o programa deve imprimir o nome da pessoa, caso contrário o programa deverá imprimir "no match found".
 
 Abaixo seguem alguns passos de "alto nível" que podem ser usados por você para resolver o problema:
 
 ```
-[1] Leia a base de dados e armazene as informações em um Objeto apropriado.
+[1] Leia a base de dados e armazene as informações em um objeto apropriado.
 [2] Leia a sequencia de DNA e armazene em __outro__ objeto apropriado.
 [3] Gere o perfil da sequencia de DNA carregada.
-[4] Procure pelo pefil gerado na base de dados.
+[4] Procure pelo perfil gerado na base de dados.
 	[4.a] Se o indivíduo for encontrado, imprima seu nome e mostre os STRs.
 	[4.b] Caso contrário imprima que foi um "no match"
 ```
@@ -136,8 +131,8 @@ Abaixo seguem alguns passos de "alto nível" que podem ser usados por você para
 
 Você pode criar quantas classes achar necessário, mas faça ao menos 3:
 
-+ Uma classe para armazernar a Base de dados e realizar busca de perfis.
-+ Uma classe para armazenar a informação de DNA de um indivíduo, bem como realizar o Perfil com base em algum STR (ou conjunto de STR)
++ Uma classe para armazernar a base de dados e realizar busca de perfis.
++ Uma classe para armazenar a informação de DNA de um indivíduo, bem como identificar o seu perfil com base em algum STR (ou conjunto de STR)
 + Uma classe para centralizar as saídas para o usuário
 
 # 7. Saída
@@ -150,7 +145,7 @@ Se for um "no match":
 
 <img src="./pics/output2.png" width="350">
 
-A saída deve ser exatamente como mostrada nas imagens (com cores e tudo!)
+A saída deve ser exatamente como mostrada nas imagens. O uso de cores é um desafio adicional!
 
 ## Authorship
 
