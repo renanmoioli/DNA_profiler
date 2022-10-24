@@ -155,11 +155,14 @@ A saída deve ser exatamente como mostrada nas imagens (com cores e tudo!)
 ## Authorship
 
 **Brian Yu, Harvard University,  [brian@cs.harvard.edu](http://nifty.stanford.edu/2020/dna/brian@cs.harvard.edu)**
+
 **David J. Malan, Harvard University,  [malan@harvard.edu](mailto:malan@harvard.edu)**
 
 
 **Adaptation: Selan R. Santos, [selan@dimap.ufrn.br](mailto:selan@dimap.ufrn.br)**
+
 **Translation to Pt-Br and Further Adaptation: Julio Melo, [julio@imd.ufrn.br](mailto:julio@imd.ufrn.br)**
+
 **Current adaptation (based on previous above): Renan Moioli, [renan.moioli@imd.ufrn.br](mailto:renan.moioli@imd.ufrn.br)**
 
 
