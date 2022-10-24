@@ -12,7 +12,7 @@
 #  1. Introdução
 
 Neste trabalho iremos desenvolver um programa de processamento de DNA. O programa, chamado **dna_profiler**[^1], deve receber duas entradas, representando 
-dois arquivoss: o primeiro, será um arquivo _[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)_ que contém uma base de dados de DNA; o segundo é um 
+dois arquivos: o primeiro, será um arquivo _[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)_ que contém uma base de dados de DNA; o segundo é um 
 arquivo de texto contendo sequencia de DNA que deve ser verficada. O seu programa deverá então, criar um perfil de DNA a partir da entrada e verificar se 
 esse perfil está presente na base de dados. Em caso positivo, seu programa deverá imprimir na saída o nome da pessoa que tem o perfil encontrado, caso 
 contrário o programa deverá imprimir _"no match found"_.
@@ -155,12 +155,11 @@ A saída deve ser exatamente como mostrada nas imagens (com cores e tudo!)
 ## Authorship
 
 **Brian Yu, Harvard University,  [brian@cs.harvard.edu](http://nifty.stanford.edu/2020/dna/brian@cs.harvard.edu)**
-
 **David J. Malan, Harvard University,  [malan@harvard.edu](mailto:malan@harvard.edu)**
 
 
 **Adaptation: Selan R. Santos, [selan@dimap.ufrn.br](mailto:selan@dimap.ufrn.br)**
-
 **Translation to Pt-Br and Further Adaptation: Julio Melo, [julio@imd.ufrn.br](mailto:julio@imd.ufrn.br)**
+**Current adaptation (based on previous above): Renan Moioli, [renan.moioli@imd.ufrn.br](mailto:renan.moioli@imd.ufrn.br)**
 
 
