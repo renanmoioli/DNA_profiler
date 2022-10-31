@@ -29,5 +29,5 @@
   - 5: implementou alguns arquivos e procedimentos de teste (com alguma documentação) 
   - 10: Ampla implementação e documentação de arquivos e procedimentos de teste
  
- #Total
+ # Total
  **...** pontos
