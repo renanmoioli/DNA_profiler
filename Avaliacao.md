@@ -28,3 +28,6 @@
   - 0: não implementou arquivos e procedimentos de teste
   - 5: implementou alguns arquivos e procedimentos de teste (com alguma documentação) 
   - 10: Ampla implementação e documentação de arquivos e procedimentos de teste
+ 
+ #Total
+ **...** pontos
