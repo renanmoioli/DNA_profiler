@@ -131,7 +131,7 @@ Abaixo seguem alguns passos de "alto nível" que podem ser usados por você para
 
 Você pode criar quantas classes achar necessário, mas faça ao menos 3:
 
-+ Uma classe para armazernar a base de dados e realizar busca de perfis.
++ Uma classe para armazenar a base de dados e realizar busca de perfis.
 + Uma classe para armazenar a informação de DNA de um indivíduo, bem como identificar o seu perfil com base em algum STR (ou conjunto de STR)
 + Uma classe para centralizar as saídas para o usuário
 
