@@ -25,10 +25,10 @@
 - Documentação do código | **... / 5**
   - 0: não documentou o código
   - 5: documentou o código 
-- Implementação e documentação de arquivos e procedimentos de teste | **... / 10**
-  - 0: não implementou arquivos e procedimentos de teste
-  - 5: implementou alguns arquivos e procedimentos de teste (com alguma documentação) 
-  - 10: Ampla implementação e documentação de arquivos e procedimentos de teste
+- Implementação e documentação de arquivos e procedimentos de compilação e teste | **... / 10**
+  - 0: não implementou arquivos e procedimentos de compilação e teste
+  - 5: implementou alguns arquivos e procedimentos de compilação e teste (com alguma documentação) 
+  - 10: Ampla implementação e documentação de arquivos e procedimentos de compilação e teste
  
  # Total
  **...** pontos
