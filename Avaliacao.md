@@ -32,3 +32,10 @@
  
  # Total
  **...** pontos
+ 
+ # Prints
+ - Adicionar na pasta *prints* pelo menos 3 imagens:
+  - print da tela indicando a compilação concluída
+  - print da tela indicando a execução de pelo menos um exemplo positivo
+  - print da tela indicando a execução do exemplo negativo (não encontrado)
+ 
